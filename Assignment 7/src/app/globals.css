@@ -4,9 +4,42 @@
 }
 
 @theme {
-  --font-sans: "Nirmala UI", "Noto Sans Bengali", Arial, sans-serif;
+  --font-sans: "Noto Sans Bengali", "Nirmala UI", Arial, sans-serif;
+}
+
+:root {
+  --color-primary: #047857;
+  --color-primary-content: #ffffff;
 }
 
 body {
   font-family: var(--font-sans);
+  color: #1e293b;
+  background: #f8faf9;
+}
+
+.site-container {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+  outline: 2px solid #047857;
+  outline-offset: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 50;
+  transform: translateY(-200%);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: #047857;
+  color: white;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
 }

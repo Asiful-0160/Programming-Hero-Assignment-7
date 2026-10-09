@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
+import "@fontsource/noto-sans-bengali/400.css";
+import "@fontsource/noto-sans-bengali/500.css";
+import "@fontsource/noto-sans-bengali/600.css";
+import "@fontsource/noto-sans-bengali/700.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -10,8 +16,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="bn" data-theme="light">
-      <body className="min-h-screen antialiased">
-        {children}
+      <body className="flex min-h-screen flex-col antialiased">
+        <a href="#main-content" className="skip-link">মূল বিষয়বস্তুতে যান</a>
+        <SiteHeader />
+        <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">{children}</main>
+        <SiteFooter />
         <Toaster position="top-right" />
       </body>
     </html>

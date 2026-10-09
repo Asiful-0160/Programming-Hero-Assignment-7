@@ -4,7 +4,7 @@ A Bengali market-price application for comparing everyday essentials across loca
 
 ## Project status
 
-Stage 1: project foundation. The starter page is implemented; product data, navigation, authentication, and profiles will follow.
+Stage 2: shared responsive header, category navigation, Bengali date (Asia/Dhaka), locally served Bengali typography, and footer. Category and authentication links target routes that will be implemented in later stages. The live price ticker follows with the product API integration.
 
 ## Technologies
 
@@ -45,6 +45,8 @@ Run `npm start` to serve a completed production build.
 
 - `src/app`: App Router pages, root layout, and global styles.
 - `public/images`: supplied assignment artwork.
+- `src/components/layout`: shared header, navigation, date, and footer.
+- `src/lib/categories.ts`: category metadata verified against the assignment API.
 
 No environment variables are required for this initial stage. Never commit authentication secrets.
 
@@ -52,3 +54,4 @@ No environment variables are required for this initial stage. Never commit authe
 
 - Live URL: pending deployment
 - Repository URL: pending manual repository creation
+
