@@ -15,6 +15,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: { default: "বাজার দর | BazarDor", template: "%s | বাজার দর" },
   description: "প্রয়োজনীয় পণ্যের দাম এক নজরে।",
+  icons: { icon: "/images/logo-icon.png" },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
