@@ -44,3 +44,21 @@ test('malformed primary response falls back; empty arrays are valid', async () =
 test('both network failures produce an actionable failure', async () => {
   await assert.rejects(fetchProducts(async () => { throw new Error('offline'); }), /unavailable/);
 });
+
+import { getCategoryProducts } from '../src/lib/products.ts';
+
+test('category filtering sorts numeric prices and restores API order without mutation', () => {
+  const products = [
+    { ...product(1, 1), today: 100 },
+    { ...product(2, 2), category: 'dal', today: 1 },
+    { ...product(3, -1), today: 9 },
+    { ...product(4, 0), today: 20 },
+    { ...product(5, 1), today: 20 },
+  ];
+  assert.deepEqual(getCategoryProducts(products, 'chal', 'price-asc').map(p => p.id), [3, 4, 5, 1]);
+  assert.deepEqual(getCategoryProducts(products, 'chal', 'price-desc').map(p => p.id), [1, 4, 5, 3]);
+  assert.deepEqual(getCategoryProducts(products, 'chal').map(p => p.id), [1, 3, 4, 5]);
+  assert.deepEqual(products.map(p => p.id), [1, 2, 3, 4, 5]);
+  assert.deepEqual(getCategoryProducts(products, 'missing'), []);
+  assert.deepEqual(getCategoryProducts([], 'chal'), []);
+});

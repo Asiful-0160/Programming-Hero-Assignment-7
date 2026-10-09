@@ -48,3 +48,12 @@ export async function fetchProducts(fetcher: typeof fetch = fetch): Promise<Prod
   }
   throw new Error("Product APIs are unavailable");
 }
+
+export type ProductSort = "default" | "price-asc" | "price-desc";
+
+export function getCategoryProducts(products: Product[], category: string, sort: ProductSort = "default") {
+  const selected = products.filter(product => product.category === category);
+  if (sort === "price-asc") selected.sort((a, b) => a.today - b.today);
+  if (sort === "price-desc") selected.sort((a, b) => b.today - a.today);
+  return selected;
+}

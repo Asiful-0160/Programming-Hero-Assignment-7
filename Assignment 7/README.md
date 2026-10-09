@@ -4,7 +4,7 @@ A Bengali market-price application for comparing everyday essentials across loca
 
 ## Project status
 
-Stage 3: home page with a hero, live API price ticker, top six percentage risers and fallers, and all product cards. Includes Bengali price formatting, skeletons, retry and empty states, and automatic fallback to the alternate assignment API. Category, product detail, and authentication destinations will be implemented in the next stages.
+Stage 4: category pages with numeric ascending/descending price sorting, category metadata, loading and empty states, and a shared friendly 404. Home page includes a hero, live API price ticker, top six percentage risers and fallers, and all product cards. Includes Bengali price formatting, skeletons, retry and empty states, and automatic fallback to the alternate assignment API. Product detail and authentication destinations will be implemented in the next stages.
 
 ## Technologies
 
@@ -55,5 +55,6 @@ No environment variables are required for this initial stage. Never commit authe
 
 - Live URL: pending deployment
 - Repository URL: pending manual repository creation
+
 
 
