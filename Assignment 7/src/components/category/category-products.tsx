@@ -19,8 +19,8 @@ export function CategoryProducts({ slug }: { slug: string }) {
           {loading ? "দামের তথ্য আসছে…" : error ? "দামের তথ্য পাওয়া যায়নি" : `${formatNumber(selected.length)}টি পণ্যের আজকের দাম ও পরিবর্তন`}
         </p>
         <div className="flex items-center gap-3">
-          <label htmlFor="category-sort" className="text-sm font-medium">সাজান:</label>
-          <select id="category-sort" value={sort} disabled={loading || !!error || !selected.length}
+          <label htmlFor={`category-sort-${slug}`} className="text-sm font-medium">সাজান:</label>
+          <select id={`category-sort-${slug}`} value={sort} disabled={loading || !!error || !selected.length}
             onChange={event => setSort(event.target.value as ProductSort)}
             className="select select-bordered w-48 bg-white text-sm">
             <option value="default">ডিফল্ট</option>

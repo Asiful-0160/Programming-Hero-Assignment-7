@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+import { AuthFeedback } from "@/components/auth/auth-feedback";
 import type { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
 import { SiteHeader } from "@/components/layout/site-header";
@@ -26,9 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main-content" tabIndex={-1} className="flex flex-1 flex-col">{children}</main>
         <SiteFooter />
         </ProductsProvider>
+        <Suspense fallback={null}><AuthFeedback /></Suspense>
         <Toaster position="top-right" />
       </body>
     </html>
   );
 }
-

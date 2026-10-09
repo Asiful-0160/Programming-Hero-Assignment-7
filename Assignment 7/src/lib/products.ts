@@ -57,3 +57,40 @@ export function getCategoryProducts(products: Product[], category: string, sort:
   if (sort === "price-desc") selected.sort((a, b) => b.today - a.today);
   return selected;
 }
+
+export type MarketPrice = { market: string; division: string; min: number; max: number };
+export type ProductDetails = Product & { yesterday: number; markets: MarketPrice[] };
+
+export function isMarketPrice(value: unknown): value is MarketPrice {
+  if (!value || typeof value !== "object") return false;
+  const market = value as MarketPrice;
+  return typeof market.market === "string" && !!market.market && typeof market.division === "string"
+    && Number.isFinite(market.min) && Number.isFinite(market.max) && market.min >= 0 && market.max >= market.min;
+}
+
+export function summarizeMarkets(markets: MarketPrice[]) {
+  if (!markets.length) return null;
+  return {
+    min: Math.min(...markets.map(market => market.min)),
+    max: Math.max(...markets.map(market => market.max)),
+    average: markets.reduce((sum, market) => sum + (market.min + market.max) / 2, 0) / markets.length,
+  };
+}
+
+export async function fetchProductDetails(slug: string, fetcher: typeof fetch = fetch): Promise<ProductDetails | null> {
+  for (const endpoint of endpoints) {
+    try {
+      const response = await fetcher(endpoint, { signal: AbortSignal.timeout(8000), cache: "no-store" });
+      if (!response.ok) throw new Error("Products unavailable");
+      const data: unknown = await response.json();
+      if (!Array.isArray(data) || !data.every(isProduct)) throw new Error("Invalid products");
+      const product = data.find(item => item.slug === slug) as ProductDetails | undefined;
+      if (!product) return null;
+      if (!Number.isFinite(product.yesterday) || !Array.isArray(product.markets) || !product.markets.every(isMarketPrice)) throw new Error("Invalid market prices");
+      return product;
+    } catch {
+      // Retry the alternate API for network failures or malformed market data.
+    }
+  }
+  throw new Error("Product details are unavailable");
+}

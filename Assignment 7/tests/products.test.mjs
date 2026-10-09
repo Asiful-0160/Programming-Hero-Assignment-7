@@ -62,3 +62,20 @@ test('category filtering sorts numeric prices and restores API order without mut
   assert.deepEqual(getCategoryProducts(products, 'missing'), []);
   assert.deepEqual(getCategoryProducts([], 'chal'), []);
 });
+
+import { fetchProductDetails, summarizeMarkets } from '../src/lib/products.ts';
+
+test('market summaries use lowest min, highest max and mean of market midpoints', () => {
+  assert.deepEqual(summarizeMarkets([{ market: 'A', division: 'X', min: 10, max: 20 }, { market: 'B', division: 'Y', min: 20, max: 50 }]), { min: 10, max: 50, average: 25 });
+  assert.equal(summarizeMarkets([]), null);
+});
+
+test('details fallback rejects malformed markets and distinguishes missing product', async () => {
+  const detail = { ...product(1, 2), yesterday: 145, markets: [{ market: 'A', division: 'X', min: 140, max: 150 }] };
+  let calls = 0;
+  const found = await fetchProductDetails('product-1', async () => Response.json([++calls === 1 ? { ...detail, markets: [{ market: 'A', division: 'X', min: 200, max: 100 }] } : detail]));
+  assert.deepEqual(found, detail);
+  assert.equal(calls, 2);
+  assert.equal(await fetchProductDetails('missing', async () => Response.json([detail])), null);
+  await assert.rejects(fetchProductDetails('product-1', async () => new Response('', { status: 429 })), /unavailable/);
+});

@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "auth:setup": "node scripts/setup-auth.mjs",
+    "auth:migrate": "node scripts/migrate-auth.mjs",
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "@fontsource/noto-sans-bengali": "^5.3.0",
@@ -16,11 +19,13 @@
     "next": "16.4.0",
     "react": "19.3.0",
     "react-dom": "19.3.0",
-    "react-hot-toast": "^2.6.1"
+    "react-hot-toast": "^2.6.1",
+    "server-only": "^0.0.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.64.0",
     "@tailwindcss/turbopack": "^4",
-    "@types/node": "^20",
+    "@types/node": "^24.19.1",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "daisyui": "^5.7.47",
@@ -30,7 +35,7 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": ">=22.0.0"
+    "node": ">=24.15.0"
   },
   "browserslist": "> 1%"
 }

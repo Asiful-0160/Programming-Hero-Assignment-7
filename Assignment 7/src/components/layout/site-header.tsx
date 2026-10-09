@@ -1,6 +1,8 @@
+import { Suspense } from "react";
 import Link from "next/link";
 import { BengaliDate } from "./bengali-date";
 import { CategoryNavigation } from "./category-navigation";
+import { AuthNavigation } from "@/components/auth/auth-navigation";
 
 export function SiteHeader() {
   return (
@@ -12,12 +14,9 @@ export function SiteHeader() {
           </Link>
           <BengaliDate />
         </div>
-        <div className="flex items-center gap-2">
-          <Link href="/signin" className="btn btn-ghost btn-sm min-h-10 px-3 text-emerald-800">সাইন ইন</Link>
-          <Link href="/signup" className="btn btn-primary btn-sm min-h-10 px-3 sm:px-4">সাইন আপ</Link>
-        </div>
+        <AuthNavigation />
       </div>
-      <CategoryNavigation />
+      <Suspense fallback={<div className="h-14 border-t border-slate-100" aria-hidden="true" />}><CategoryNavigation /></Suspense>
     </header>
   );
 }
