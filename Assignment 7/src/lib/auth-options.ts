@@ -1,10 +1,11 @@
 import { APIError } from "better-auth/api";
 import type { BetterAuthOptions } from "better-auth";
-import type { DatabaseSync } from "node:sqlite";
 
-export function createAuthOptions(database: DatabaseSync): BetterAuthOptions {
+
+export function createAuthOptions(database: NonNullable<BetterAuthOptions["database"]>): BetterAuthOptions {
   const secret = process.env.BETTER_AUTH_SECRET;
   if (!secret || secret.length < 32) throw new Error("Set BETTER_AUTH_SECRET to a random value of at least 32 characters in .env.local.");
+  if (process.env.VERCEL && !process.env.BETTER_AUTH_URL) throw new Error("Set BETTER_AUTH_URL to your public deployment origin.");
   const baseURL = process.env.BETTER_AUTH_URL || "http://localhost:3000";
   return {
     appName: "BazarDor",

@@ -15,7 +15,7 @@ Protected product details now include market-based minimum, maximum and average 
 
 ## Technologies
 
-Next.js App Router, React, TypeScript, Tailwind CSS, DaisyUI, BetterAuth, SQLite, react-hot-toast, and Playwright.
+Next.js App Router, React, TypeScript, Tailwind CSS, DaisyUI, BetterAuth, SQLite/PostgreSQL, react-hot-toast, and Playwright.
 
 ## Local development
 
@@ -64,13 +64,13 @@ npm run build
 npm run test:browser
 ```
 
-Browser tests use an installed Google Chrome and a separate `.data/auth-e2e.sqlite` database on port 3100. Use `PLAYWRIGHT_CHANNEL=msedge` if Chrome is unavailable. Test passwords and accounts are generated only in isolated test databases. Tests cover validation, registration, login, persistent sessions, logout, hashed passwords, rejected origins, product formatting, sorting, and API fallback.
+Browser tests use an installed Google Chrome and a separate `.data/auth-e2e.sqlite` database on port 3100. Use `PLAYWRIGHT_CHANNEL=msedge` if Chrome is unavailable. Test passwords and accounts are generated only in isolated test databases. Storefront tests cover 320px, 768px, and 1440px widths, sorting, retry/empty states, and reduced motion using isolated test data. Tests also cover validation, registration, login, persistent sessions, logout, hashed passwords, rejected origins, product formatting, sorting, and API fallback.
 
 Run `npm start` to serve the production build at http://localhost:3000.
 
 ## Deployment note
 
-The current database is local SQLite. Before deploying to an ephemeral/serverless platform such as Vercel, switch to a persistent hosted database and run the matching migrations. Configure a production `BETTER_AUTH_SECRET`, public `BETTER_AUTH_URL`, and production OAuth callback URLs. Do not deploy the local database or use it as serverless persistent storage.
+Vercel deployment with hosted PostgreSQL is prepared. Set `DATABASE_URL` to select PostgreSQL, run `npm run auth:migrate` against that database, and configure the public origin and OAuth credentials. SQLite remains the local default; it is never used as fallback on Vercel. See [the deployment guide](docs/DEPLOYMENT.md) for the exact root directory, environment variables, migrations, and verification steps. Run `npm run deploy:check` with production settings before submission.
 
 ## Structure
 
@@ -84,6 +84,6 @@ The current database is local SQLite. Before deploying to an ephemeral/serverles
 ## Submission
 
 - Live URL: pending deployment
-- Repository URL: pending manual entry
+- Repository URL: https://github.com/Asiful-0160/Programming-Hero-Assignment-7
 
 Market averages use the arithmetic mean of each market's min/max midpoint. Product-detail tests use isolated fixtures; the application always uses the supplied APIs and shows an error when both are unavailable.

@@ -16,6 +16,7 @@ export default defineConfig({
       BETTER_AUTH_URL: 'http://localhost:3100',
       BETTER_AUTH_SECRET: randomBytes(48).toString('base64url'),
       AUTH_DATABASE_PATH: '.data/auth-e2e.sqlite',
+      DATABASE_URL: '', VERCEL: '',
       GOOGLE_CLIENT_ID: '', GOOGLE_CLIENT_SECRET: '', GITHUB_CLIENT_ID: '', GITHUB_CLIENT_SECRET: '',
     },
   },
