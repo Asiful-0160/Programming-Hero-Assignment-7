@@ -4,7 +4,7 @@ A Bengali market-price application for comparing everyday essentials across loca
 
 ## Project status
 
-Stage 2: shared responsive header, category navigation, Bengali date (Asia/Dhaka), locally served Bengali typography, and footer. Category and authentication links target routes that will be implemented in later stages. The live price ticker follows with the product API integration.
+Stage 3: home page with a hero, live API price ticker, top six percentage risers and fallers, and all product cards. Includes Bengali price formatting, skeletons, retry and empty states, and automatic fallback to the alternate assignment API. Category, product detail, and authentication destinations will be implemented in the next stages.
 
 ## Technologies
 
@@ -34,6 +34,7 @@ Open http://localhost:3000.
 ## Validation
 
 ```sh
+npm test
 npm run lint
 npm run typecheck
 npm run build
@@ -54,4 +55,5 @@ No environment variables are required for this initial stage. Never commit authe
 
 - Live URL: pending deployment
 - Repository URL: pending manual repository creation
+
 

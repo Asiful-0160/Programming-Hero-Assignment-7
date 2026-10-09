@@ -43,3 +43,17 @@ body {
 .skip-link:focus {
   transform: translateY(0);
 }
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.ticker-track { animation: ticker-scroll 180s linear infinite; }
+.ticker-window:hover .ticker-track,
+.ticker-paused .ticker-track { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  .ticker-window { overflow-x: auto; }
+  .ticker-track ul[aria-hidden="true"], .ticker-control { display: none; }
+  .skeleton { animation: none; }
+}
