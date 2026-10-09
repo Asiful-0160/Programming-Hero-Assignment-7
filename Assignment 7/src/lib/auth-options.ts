@@ -1,3 +1,4 @@
+import { APIError } from "better-auth/api";
 import type { BetterAuthOptions } from "better-auth";
 import type { DatabaseSync } from "node:sqlite";
 
@@ -11,6 +12,18 @@ export function createAuthOptions(database: DatabaseSync): BetterAuthOptions {
     secret,
     baseURL,
     trustedOrigins: [new URL(baseURL).origin],
+    databaseHooks: {
+      user: {
+        update: {
+          before: async (user) => {
+            if (user.name === undefined) return;
+            const name = user.name.trim();
+            if (!name || name.length > 100) throw new APIError("BAD_REQUEST", { message: "Name must contain 1 to 100 characters." });
+            return { data: { ...user, name } };
+          },
+        },
+      },
+    },
     emailAndPassword: {
       enabled: true,
       autoSignIn: false,

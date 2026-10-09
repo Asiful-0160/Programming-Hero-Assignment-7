@@ -1,4 +1,7 @@
 import { test, expect } from '@playwright/test';
+// Model a separate client per suite so authentication throttles stay enabled.
+test.use({ extraHTTPHeaders: { 'x-forwarded-for': '192.0.2.2' } });
+
 
 const details = {
   id: 1, slug: 'sorno-machi-chal', nameBn: 'স্বর্ণমাছি চাল', category: 'chal', categoryNameBn: 'চাল', unit: 'kg', image: '🍚', today: 148, yesterday: 145, change: { dir: 'up', pct: 2.1 },

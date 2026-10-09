@@ -11,7 +11,7 @@ A Bengali market-price application for comparing everyday essentials across loca
 - BetterAuth email/password registration, sign-in, persistent sessions, and logout.
 - Friendly 404 pages and Bengali validation/toast messages.
 
-Protected product details now include market-based minimum, maximum and average prices, a responsive market table, retry and missing-product states. Both the page and its API validate the session on the server. Profile pages are the next stage. Google/GitHub sign-in is wired but requires your OAuth credentials; buttons are unavailable until configured.
+Protected product details now include market-based minimum, maximum and average prices, a responsive market table, retry and missing-product states. Both the page and its API validate the session on the server. Protected profile and name-editing pages are implemented at `/profile` and `/profile/edit`, with server-side name validation and immediate session/navbar refresh. Google/GitHub sign-in is wired but requires your OAuth credentials; buttons are unavailable until configured.
 
 ## Technologies
 
@@ -87,4 +87,3 @@ The current database is local SQLite. Before deploying to an ephemeral/serverles
 - Repository URL: pending manual entry
 
 Market averages use the arithmetic mean of each market's min/max midpoint. Product-detail tests use isolated fixtures; the application always uses the supplied APIs and shows an error when both are unavailable.
-
