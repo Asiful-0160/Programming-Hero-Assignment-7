@@ -5,7 +5,7 @@
 Import `https://github.com/Asiful-0160/Programming-Hero-Assignment-7` into Vercel.
 
 - Framework: Next.js
-- Root Directory: **Assignment 7** (the repository root is one directory above the app)
+- Root Directory: **assignment-7** (the repository root is one directory above the app)
 - Node.js: **24.x**
 - Install command: `npm ci`
 - Build command: `npm run build`
