@@ -11,7 +11,7 @@ A Bengali market-price application for comparing everyday essentials across loca
 - BetterAuth email/password registration, sign-in, persistent sessions, and logout.
 - Friendly 404 pages and Bengali validation/toast messages.
 
-Protected product details now include market-based minimum, maximum and average prices, a responsive market table, retry and missing-product states. Both the page and its API validate the session on the server. Protected profile and name-editing pages are implemented at `/profile` and `/profile/edit`, with server-side name validation and immediate session/navbar refresh. Google/GitHub sign-in is wired but requires your OAuth credentials; buttons are unavailable until configured.
+Protected product details now include market-based minimum, maximum and average prices, a responsive market table, retry and missing-product states. Both the page and its API validate the session on the server. Protected profile and name-editing pages are implemented at `/profile` and `/profile/edit`, with server-side name validation and immediate session/navbar refresh. Google and GitHub sign-in are configured on the live site. For a local installation, supply your own OAuth credentials.
 
 ## Technologies
 
@@ -19,7 +19,7 @@ Next.js App Router, React, TypeScript, Tailwind CSS, DaisyUI, BetterAuth, SQLite
 
 ## Local development
 
-Use Node.js **24.15 or newer** (built-in SQLite) and npm.
+Use Node.js **24.x, version 24.15 or newer** (built-in SQLite) and npm.
 
 ```sh
 npm ci
@@ -30,7 +30,7 @@ npm run dev
 
 Open http://localhost:3000. Registration leads to sign-in; successful sign-in leads home. Email verification and password reset are intentionally omitted per the assignment.
 
-`auth:setup` creates `.env.local` with a random secret only if that file does not already exist. `auth:migrate` creates/updates BetterAuth's schema. The local database is `.data/auth.sqlite`. Environment secrets, databases, and browser-test artifacts are ignored by Git. Keep `.env.example` committed as the configuration template.
+`auth:setup` creates `.env.local` with a random secret only if that file does not already exist. `auth:migrate` creates/updates BetterAuth's schema. Without `DATABASE_URL`, the local database is `.data/auth.sqlite`; setting `DATABASE_URL` selects PostgreSQL. Environment secrets, databases, and browser-test artifacts are ignored by Git. Keep `.env.example` committed as the configuration template.
 
 ## Google and GitHub sign-in
 
@@ -70,7 +70,7 @@ Run `npm start` to serve the production build at http://localhost:3000.
 
 ## Deployment note
 
-Vercel deployment with hosted PostgreSQL is prepared. Set `DATABASE_URL` to select PostgreSQL, run `npm run auth:migrate` against that database, and configure the public origin and OAuth credentials. SQLite remains the local default; it is never used as fallback on Vercel. See [the deployment guide](docs/DEPLOYMENT.md) for the exact root directory, environment variables, migrations, and verification steps. Run `npm run deploy:check` with production settings before submission.
+The live application is deployed on Vercel with Neon PostgreSQL. Set `DATABASE_URL` to select PostgreSQL, run `npm run auth:migrate` against that database, and configure the public origin and OAuth credentials. SQLite remains the local default; it is never used as fallback on Vercel. See [the deployment guide](docs/DEPLOYMENT.md) for the exact root directory, environment variables, migrations, and verification steps. Run `npm run deploy:check` with production settings before submission.
 
 ## Structure
 
@@ -83,7 +83,7 @@ Vercel deployment with hosted PostgreSQL is prepared. Set `DATABASE_URL` to sele
 
 ## Submission
 
-- Live URL: pending deployment
+- Live URL: [BazarDor](https://programming-hero-assignment-7-assig.vercel.app)
 - Repository URL: https://github.com/Asiful-0160/Programming-Hero-Assignment-7
 
 Market averages use the arithmetic mean of each market's min/max midpoint. Product-detail tests use isolated fixtures; the application always uses the supplied APIs and shows an error when both are unavailable.
